@@ -70,6 +70,7 @@ if (isset($_POST['aname'])){
                 $_SESSION["errormassage"] = "User aleready exist";
                 header("Location:../registerpanel.php");  header("Location:adminmanager.php");
             }
+          
             // IF EVERYTHING IS OK WITH INPUT
             else{
                 // hash password
@@ -144,5 +145,53 @@ if (isset($_POST['aname'])){
         header("Location:adminmanager.php");
        }
     }
-   
+
+
+    // <!-- LOGIN ACTIONS 
+        // LOGIN ADMIN
+    // 
+
+    if (isset($_POST['lemail']) ) {
+    
+        $email=$_POST['lemail'];
+        $password=$_POST['password'];
+        
+        if(empty($email) || empty($password)){
+            $_SESSION["errormassage"] = "All places must be filled";
+        }
+        else{
+            // FIND USER IS ACTION FROM USERDB
+           $FindedAdmin=findAdmin($email);
+    
+            //    check if user exist with same email
+           if($FindedAdmin){
+            //    check is password is right
+               if (password_verify($password,$FindedAdmin['password'])) {
+                   // SET SESSIONS
+                        $_SESSION["succesmassage"]="You successfully register";
+                        $_SESSION['adminid']=$FindedAdmin['id'];
+                        $_SESSION['adminname']=$FindedAdmin['f_name'];
+                        $_SESSION['adminemail']=$FindedAdmin['email'];
+                        header("Location:adminmanager.php");
+               } else {
+                $_SESSION["errormassage"] ="Password doesn't match";
+                header("Location:adminlogin.php");
+               }
+               
+          
+           
+            
+            
+    
+    
+        //   IF USER DOESNT EXIST
+           }else{
+            $_SESSION["errormassage"] = "Admin doesn't exist";
+            header("Location:adminlogin.php");
+           }
+        }
+       
+    }
+
+
  ?>

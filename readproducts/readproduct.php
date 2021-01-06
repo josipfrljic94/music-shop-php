@@ -22,11 +22,16 @@ else: ?>
 
 //   var_dump($products);
  foreach($products as $product): ?>
-    <div class="card">
-        <h3 class="card-title"> <?php echo $product['name'] ?></h3> 
-        
-    </div>
-    
+  <div class="col-lg-3 mx-lg-auto col-md-4 col-sm-6  mx-sm-auto md-mx-1  p-0 border-0 shadow-sm p-1 mb-2 rounded-0 ">
+    <div class="card rounded-0 w-100 " style="height:350px; border:none;">
+  <img src="../images/<?php echo $product['image'] ?>" class="card-img-top  w-100" style="height:60%;" alt="<?php echo $product['name'] ?>">
+  <div class="card-body mx-auto text-center col-lg-12" style="height:40%; border-top:0.5px solid #e1e1e1e1;">
+    <h5 class="card-title"><?php echo $product['name'] ?></h5>
+    <p class="card-text"><?php echo $product['price'] ?></p>
+    <a href="detailproduct.php?id=<?php echo $product['id'] ?>" class="btn btn-primary rounded-0 btn-block col-lg-12  ">Details</a>
+  </div>
+</div>
+</div>   
 
  <?php endforeach ?>
   
@@ -227,10 +232,21 @@ if(isset($_GET['did'])){
 
 }
 
+// FUNCTION READ ONE PRODUCT
+function readOneProduct($id){
+  // check id exist
+ if (isset($_GET['id'])){
 
+$id=$_GET['id'];
 
-
-
+    // IF RESULT EXIST
+    if(readProductquery($id)){
+      return readProductquery($id);
+    }else{
+      header('Location:../');
+    }
+}
+}
 ?>
 
       
