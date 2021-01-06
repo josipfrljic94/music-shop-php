@@ -71,12 +71,23 @@
       </ul>
 
       <ul class="navbar-nav" style="margin:0 50px;">
+
+      <!-- LOGIN LOGOUT DEPEND ABOUT WHO IS LOGIN -->
       <?php if(isset($_SESSION["customerid"])): ?>
         <li class="nav-item ">
           <a class="nav-link" href="userfunctions/logout.php">
+          <!-- SESSION FUNCTION -->
           <?php   echo  CustomerName(); ?>
           </a>
         </li>
+
+        <?php elseif(isset($_SESSION["adminid"])): ?>
+        <li class="nav-item ">
+          <a class="nav-link" href="../admin/adminlogout.php">
+          <?php   echo  AdminName(); ?>
+          </a>
+        </li>
+
         <?php else: ?>
           <li class="nav-item">
           <a class="nav-link" href="registerpanel.php"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">

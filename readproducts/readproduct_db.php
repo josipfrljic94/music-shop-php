@@ -33,7 +33,11 @@ function readProductquery($id){
     $sth= $pdo->query($sql);
     $sth->execute();
     $result = $sth->fetch();
-    return $result;
+    if($result){
+        return $result;
+    }else{
+        return false;
+    }
 }
 
 
@@ -71,6 +75,8 @@ if($result){
     return false;
 }
 }
+
+
 
 ?>
 
